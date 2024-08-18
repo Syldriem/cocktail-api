@@ -1,5 +1,10 @@
 import "../css/App.css";
+import { LandingPage } from "./Landing";
 
 export function App() {
-  return <>This is the App Component!</>;
+  return (
+    <>
+      <LandingPage />
+    </>
+  );
 }
