@@ -5,7 +5,7 @@ export function LandingPage() {
     const fetchRandomCocktail = async () => {
       try {
         const response = await fetch(
-          "www.thecocktaildb.com/api/json/v1/1/random.php"
+          "https://www.thecocktaildb.com/api/json/v1/1/random.php"
         );
         if (!response.ok) {
           console.error("response not ok");
