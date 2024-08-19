@@ -1,6 +1,14 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+
+interface Cocktail {
+  idDrink: string;
+  strDrink: string;
+  strInstructions: string;
+  strDrinkThumb: string;
+}
 
 export function LandingPage() {
+  const [cocktail, setCocktail] = useState<Cocktail>();
   useEffect(() => {
     const fetchRandomCocktail = async () => {
       try {
@@ -13,8 +21,9 @@ export function LandingPage() {
         if (
           response.headers.get("content-type")?.includes("application/json")
         ) {
-          const data = await response.json();
-          console.log(data);
+          const info = await response.json();
+          setCocktail(info.drinks[0]);
+          console.log(info.drinks[0]);
         } else {
           const dataText = await response.text();
           console.log("response format: ", dataText);
@@ -25,5 +34,15 @@ export function LandingPage() {
     };
     fetchRandomCocktail();
   }, []);
-  return <div>yo</div>;
+
+  return (
+    <div>
+      <img
+        src={cocktail?.strDrinkThumb}
+        alt={cocktail?.strDrink}
+        style={{ width: "300px" }}
+      />
+      <div>{cocktail?.strDrink}</div>
+    </div>
+  );
 }
