@@ -1,11 +1,5 @@
 import { ReactElement, useEffect, useState } from "react";
-
-interface Cocktail {
-  idDrink: string;
-  strDrink: string;
-  strInstructions: string;
-  strDrinkThumb: string;
-}
+import { Cocktail } from "../interfaces";
 
 export function LandingPage(): ReactElement {
   const [cocktail, setCocktail] = useState<Cocktail>();
