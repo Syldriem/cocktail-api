@@ -2,7 +2,7 @@ import { FormEventHandler, ReactElement, useState } from "react";
 import { Cocktail } from "../interfaces";
 
 export function SearchPage(): ReactElement {
-  const [drink, getDrink] = useState<Cocktail>();
+  const [drink, getDrink] = useState<Cocktail[]>([]);
   const [inputValue, getInputValue] = useState("");
   const getDrinkByName = async (name: string) => {
     try {
@@ -13,8 +13,7 @@ export function SearchPage(): ReactElement {
         console.log("response not ok");
       }
       const data = await res.json();
-      console.log(data);
-      getDrink(data.drinks[0]);
+      getDrink(data.drinks);
     } catch (err) {
       console.error("there was an error", err);
     }
@@ -24,6 +23,14 @@ export function SearchPage(): ReactElement {
     getDrinkByName(inputValue);
     console.log(drink);
   };
+  const renderDrinks: ReactElement[] = drink.map((d) => {
+    return (
+      <a key={d.idDrink} href="/InfoPage">
+        {d.strDrink}
+      </a>
+    );
+  });
+
   return (
     <>
       <form onSubmit={handleOnSubmit}>
@@ -34,6 +41,7 @@ export function SearchPage(): ReactElement {
         />
         <button type="submit">Search</button>
       </form>
+      {renderDrinks}
     </>
   );
 }
