@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { ReactElement, useEffect, useState } from "react";
 
 interface Cocktail {
   idDrink: string;
@@ -7,7 +7,7 @@ interface Cocktail {
   strDrinkThumb: string;
 }
 
-export function LandingPage() {
+export function LandingPage(): ReactElement {
   const [cocktail, setCocktail] = useState<Cocktail>();
   useEffect(() => {
     const fetchRandomCocktail = async () => {
